@@ -166,17 +166,21 @@
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <p>Cross-Platform Compatability is a great tool for developers and players. It allows you to play your favorite games with all your friends regardless of the device. Developing a game to be compatible with all platforms is difficult; One of the hardest parts is creating UI that works with all devices. </p>
 <p>Today, we'll create a title screen that's compatible with computers, consoles, and mobile devices. Before you start, here's some vocabulary that we'll be discussing, and what it means.</p>
+<h2><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h2>
 <ul>
-<li>
-<p>Scale: The size of an object in %. When not parented to a GUI object, it will take up a % of the screen. When parented to a GUI object, it will take up a % of the parent's size. If a GuiObject is set to `{0.5, 0, 0.5, 0} when parented to a GUI object, it will take up 50% of the parent's size, horizontally and vertically</p>
-</li>
-<li>
-<p>Represented by <code>{ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
-</li>
-<li>
-<p>Offset: The size of an object in pixels. Does not take into account the size of the parent. If a GuiObject is set to <code>{0, 150, 0, 150}</code> when parented to a GUI object, it will take up 150 pixels horizontally and vertically.</p>
-</li>
+<li>Basic understanding of Luau as a language</li>
+<li>Basic understanding of Roblox Instances, and their properties</li>
+<li>Basic understanding of Events, Functions, and Connections</li>
 </ul>
+<h2><a class="header" href="#vocabulary" id="vocabulary">Vocabulary</a></h2>
+<ul>
+<li>Scale: The size/position of an object in %. When not parented to a GUI object, it will take up a % of the screen. When parented to a GUI object, it will take up a % of the parent's size. If a GuiObject is set to <code>{0.5, 0, 0.5, 0}</code> when parented to a GUI object, it will take up 50% of the parent's size, horizontally and vertically</li>
+</ul>
+<p><code>Represented by: {ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
+<ul>
+<li>Offset: The size/position of an object in pixels. Does not take into account the size of the parent. If a GuiObject is set to <code>{0, 150, 0, 150}</code> when parented to a GUI object, it will take up 150 pixels horizontally and vertically.</li>
+</ul>
+<p><code>Represented by: {ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
 
                     </main>
 
@@ -207,6 +211,21 @@
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

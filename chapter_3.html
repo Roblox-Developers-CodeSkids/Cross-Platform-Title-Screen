@@ -196,7 +196,7 @@ local CreditsButton  = Holder.Credits
 local BackButton 	 = Holder.CreditsFrame.Back
 
 </code></pre>
-<p>We're almost done! All we need to do now is define some visal effects, alongside a table to make later sections a bit easier to script and manage. </p>
+<p>Nothing advanced here, we're just getting references to our objects so we can use them. We're almost done! All we need to do now is define some visal effects, alongside a table to make later sections a bit easier to script and manage. </p>
 <pre><code class="language-lua">-------------------------------------------------------
 -- UI Effects || ETCs
 local HoverColor	 = Color3.fromRGB(89, 183, 255)
@@ -204,7 +204,7 @@ local OriginalColor  = Color3.fromRGB(255, 255, 255)
 local ButtonTable    = {PlayButton, CreditsButton}
 local Connections	 = {}
 </code></pre>
-<p>We're using the Connections table to store our future connections, alongside the ButtonTable to store the buttons we want effects for.</p>
+<p>Why are we storing buttons in <code>ButtonTable</code>? Simple, we want to store them in the table so we can use a for loop, instead of having to manualy connect to certain events one by one.</p>
 <p>Now that we've gotten all our examples down, we can start writing functions to connect to our events.</p>
 <pre><code class="language-lua">-------------------------------------------------------
 -- Functions
@@ -273,108 +273,6 @@ GuiService.SelectedObject = PlayButton
 <p>Finally, we insert our connected events to a table, for later use. It's important to store your events somewhere, so they can be disconnected when they are no longer needed. This saves memory, and improves game performance.</p>
 <p>Final Product Gif:</p>
 <p><img src="https://gyazo.com/4d3992b5a553100dd31ebfb8ddc77af0.gif" alt="Final Product GIF" /></p>
-<p>Final Product Code:</p>
-<pre><code class="language-lua">-------------------------------------------------------
--- PineappleDoge || UI_Manager
--- Created: 3-9-2021 || Updated: 3-9-2021
--- Tutorial for Cross-Compatible UI 
-
--------------------------------------------------------
--- Services
-local PlayerService = game:GetService(&quot;Players&quot;) -- so we can get our local player 
-local GuiService	= game:GetService(&quot;GuiService&quot;) -- so we can add controller &amp; WASD/Arrow key support
-
-
--------------------------------------------------------
--- Player Objects
-local Player  	     = PlayerService.LocalPlayer
-local Character      = Player.Character or Player.CharacterAdded:Wait()
-local PlayerGui 	 = Player.PlayerGui
-local Controls   	 = require(Player.PlayerScripts:WaitForChild(&quot;PlayerModule&quot;)):GetControls()
-
-
--------------------------------------------------------
--- UI Objects || Core
-local ScreenGui		 = PlayerGui:WaitForChild(&quot;ScreenGui&quot;)
-local Holder		 = ScreenGui:WaitForChild(&quot;Holder&quot;)
-
-
--------------------------------------------------------
--- Frames || Buttons
-local CreditsFrame	 = Holder.CreditsFrame
-local PlayButton	 = Holder.Play
-local CreditsButton  = Holder.Credits
-local BackButton 	 = Holder.CreditsFrame.Back
-
-
--------------------------------------------------------
--- UI Effects || ETCs
-local HoverColor	 = Color3.fromRGB(89, 183, 255)
-local OriginalColor  = Color3.fromRGB(255, 255, 255)
-local ButtonTable    = {PlayButton, CreditsButton}
-local Connections	 = {}
-
-
--------------------------------------------------------
--- Functions
-function PlayButtonActivated()
-	ScreenGui.Enabled = false
-	GuiService.SelectedObject = nil
-	Controls:Enable()
-	
-	for i, connection in pairs(Connections) do
-		connection:Disconnect()
-	end
-end
-
-function CreditsButtonActivated()
-	CreditsButton.Visible = false
-	PlayButton.Visible = false
-	
-	CreditsFrame.Visible = true
-	GuiService.SelectedObject = BackButton
-end
-
-function BackButtonActivated()
-	CreditsFrame.Visible = false
-	
-	CreditsButton.Visible = true
-	PlayButton.Visible = true
-	GuiService.SelectedObject = PlayButton
-end
-
-
--------------------------------------------------------
--- Connections
-PlayButton.Activated:Connect(PlayButtonActivated)
-BackButton.Activated:Connect(BackButtonActivated)
-CreditsButton.Activated:Connect(CreditsButtonActivated)
-
-for index, button in pairs(ButtonTable) do
-	local Enter1 = button.MouseEnter:Connect(function()
-		button.BackgroundColor3 = HoverColor
-	end)
-	
-	local Leave1 = button.MouseLeave:Connect(function()
-		button.BackgroundColor3 = OriginalColor
-	end)
-	
-	local Enter2 = button.SelectionGained:Connect(function()
-		button.BackgroundColor3 = HoverColor
-	end)
-	
-	local Leave2 = button.SelectionLost:Connect(function()
-		button.BackgroundColor3 = OriginalColor
-	end)
-	table.insert(Connections, Enter1)
-	table.insert(Connections, Leave1)
-	table.insert(Connections, Enter2)
-	table.insert(Connections, Leave2)
-end
-
-Controls:Disable()
-GuiService.SelectedObject = PlayButton
-</code></pre>
 
                     </main>
 
@@ -405,6 +303,21 @@ GuiService.SelectedObject = PlayButton
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

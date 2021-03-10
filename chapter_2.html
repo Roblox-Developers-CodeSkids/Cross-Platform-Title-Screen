@@ -180,8 +180,9 @@
 <li>Credits</li>
 </ul>
 <p>If done correctly, it should end up looking like below:</p>
-<p><img src="https://media.discordapp.net/attachments/565281989125472291/818913391535718450/Screenshot_1.png" alt="space_inv" /></p>
-<p><img src="https://i.imgur.com/SPldves.png" alt="LOL" /></p>
+<p><img src="https://media.discordapp.net/attachments/565281989125472291/818913391535718450/Screenshot_1.png" alt="Screenshot" /></p>
+<p><img src="https://i.imgur.com/SPldves.png" alt="Screenshot2" /></p>
+<p>Finally, we'll want to add the credits menu. Insert a frame parented to &quot;Holder&quot;, and name it <code>CreditsFrame</code>. Change the size and position to Scale. We'll want to insert a <code>TextLabel</code>, change</p>
 <h2><a class="header" href="#preparation-for-scripting" id="preparation-for-scripting">Preparation for scripting</a></h2>
 <p>We'll change the Size and Position to scale, alongside changing the AnchorPoint to <code>0.5, 0.5</code>. Once that's done, we can place the buttons anywhere we want, and we're almost ready to start scripting. In order to take advantage of certain cross-platform compatability tools, we'll need to change certain properties in our buttons.</p>
 <p>To make sure the text is readable on all devices, we'll want to turn the <code>TextScaled</code> property to true, so it's not too big or small on any device. </p>
@@ -227,6 +228,21 @@
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

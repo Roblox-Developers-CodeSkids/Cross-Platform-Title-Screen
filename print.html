@@ -168,17 +168,21 @@
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <p>Cross-Platform Compatability is a great tool for developers and players. It allows you to play your favorite games with all your friends regardless of the device. Developing a game to be compatible with all platforms is difficult; One of the hardest parts is creating UI that works with all devices. </p>
 <p>Today, we'll create a title screen that's compatible with computers, consoles, and mobile devices. Before you start, here's some vocabulary that we'll be discussing, and what it means.</p>
+<h2><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h2>
 <ul>
-<li>
-<p>Scale: The size of an object in %. When not parented to a GUI object, it will take up a % of the screen. When parented to a GUI object, it will take up a % of the parent's size. If a GuiObject is set to `{0.5, 0, 0.5, 0} when parented to a GUI object, it will take up 50% of the parent's size, horizontally and vertically</p>
-</li>
-<li>
-<p>Represented by <code>{ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
-</li>
-<li>
-<p>Offset: The size of an object in pixels. Does not take into account the size of the parent. If a GuiObject is set to <code>{0, 150, 0, 150}</code> when parented to a GUI object, it will take up 150 pixels horizontally and vertically.</p>
-</li>
+<li>Basic understanding of Luau as a language</li>
+<li>Basic understanding of Roblox Instances, and their properties</li>
+<li>Basic understanding of Events, Functions, and Connections</li>
 </ul>
+<h2><a class="header" href="#vocabulary" id="vocabulary">Vocabulary</a></h2>
+<ul>
+<li>Scale: The size/position of an object in %. When not parented to a GUI object, it will take up a % of the screen. When parented to a GUI object, it will take up a % of the parent's size. If a GuiObject is set to <code>{0.5, 0, 0.5, 0}</code> when parented to a GUI object, it will take up 50% of the parent's size, horizontally and vertically</li>
+</ul>
+<p><code>Represented by: {ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
+<ul>
+<li>Offset: The size/position of an object in pixels. Does not take into account the size of the parent. If a GuiObject is set to <code>{0, 150, 0, 150}</code> when parented to a GUI object, it will take up 150 pixels horizontally and vertically.</li>
+</ul>
+<p><code>Represented by: {ScaleX, OffsetX, ScaleY, OffsetY}</code></p>
 <h1><a class="header" href="#design" id="design">Design</a></h1>
 <p>Before we can script the UI, we'll need to properly design the menu before anything else. </p>
 <p>To start, we'll want to create a ScreenGui to display GUI. After that, we'll create a frame named &quot;Holder&quot;, to hold our UI elements. This allows us to scale our parent frame, and resize the children at the same time. Before we start adding children to the Holder frame, we'll want to edit a few properties.</p>
@@ -196,8 +200,9 @@
 <li>Credits</li>
 </ul>
 <p>If done correctly, it should end up looking like below:</p>
-<p><img src="https://media.discordapp.net/attachments/565281989125472291/818913391535718450/Screenshot_1.png" alt="space_inv" /></p>
-<p><img src="https://i.imgur.com/SPldves.png" alt="LOL" /></p>
+<p><img src="https://media.discordapp.net/attachments/565281989125472291/818913391535718450/Screenshot_1.png" alt="Screenshot" /></p>
+<p><img src="https://i.imgur.com/SPldves.png" alt="Screenshot2" /></p>
+<p>Finally, we'll want to add the credits menu. Insert a frame parented to &quot;Holder&quot;, and name it <code>CreditsFrame</code>. Change the size and position to Scale. We'll want to insert a <code>TextLabel</code>, change</p>
 <h2><a class="header" href="#preparation-for-scripting" id="preparation-for-scripting">Preparation for scripting</a></h2>
 <p>We'll change the Size and Position to scale, alongside changing the AnchorPoint to <code>0.5, 0.5</code>. Once that's done, we can place the buttons anywhere we want, and we're almost ready to start scripting. In order to take advantage of certain cross-platform compatability tools, we'll need to change certain properties in our buttons.</p>
 <p>To make sure the text is readable on all devices, we'll want to turn the <code>TextScaled</code> property to true, so it's not too big or small on any device. </p>
@@ -238,7 +243,7 @@ local CreditsButton  = Holder.Credits
 local BackButton 	 = Holder.CreditsFrame.Back
 
 </code></pre>
-<p>We're almost done! All we need to do now is define some visal effects, alongside a table to make later sections a bit easier to script and manage. </p>
+<p>Nothing advanced here, we're just getting references to our objects so we can use them. We're almost done! All we need to do now is define some visal effects, alongside a table to make later sections a bit easier to script and manage. </p>
 <pre><code class="language-lua">-------------------------------------------------------
 -- UI Effects || ETCs
 local HoverColor	 = Color3.fromRGB(89, 183, 255)
@@ -246,7 +251,7 @@ local OriginalColor  = Color3.fromRGB(255, 255, 255)
 local ButtonTable    = {PlayButton, CreditsButton}
 local Connections	 = {}
 </code></pre>
-<p>We're using the Connections table to store our future connections, alongside the ButtonTable to store the buttons we want effects for.</p>
+<p>Why are we storing buttons in <code>ButtonTable</code>? Simple, we want to store them in the table so we can use a for loop, instead of having to manualy connect to certain events one by one.</p>
 <p>Now that we've gotten all our examples down, we can start writing functions to connect to our events.</p>
 <pre><code class="language-lua">-------------------------------------------------------
 -- Functions
@@ -315,108 +320,6 @@ GuiService.SelectedObject = PlayButton
 <p>Finally, we insert our connected events to a table, for later use. It's important to store your events somewhere, so they can be disconnected when they are no longer needed. This saves memory, and improves game performance.</p>
 <p>Final Product Gif:</p>
 <p><img src="https://gyazo.com/4d3992b5a553100dd31ebfb8ddc77af0.gif" alt="Final Product GIF" /></p>
-<p>Final Product Code:</p>
-<pre><code class="language-lua">-------------------------------------------------------
--- PineappleDoge || UI_Manager
--- Created: 3-9-2021 || Updated: 3-9-2021
--- Tutorial for Cross-Compatible UI 
-
--------------------------------------------------------
--- Services
-local PlayerService = game:GetService(&quot;Players&quot;) -- so we can get our local player 
-local GuiService	= game:GetService(&quot;GuiService&quot;) -- so we can add controller &amp; WASD/Arrow key support
-
-
--------------------------------------------------------
--- Player Objects
-local Player  	     = PlayerService.LocalPlayer
-local Character      = Player.Character or Player.CharacterAdded:Wait()
-local PlayerGui 	 = Player.PlayerGui
-local Controls   	 = require(Player.PlayerScripts:WaitForChild(&quot;PlayerModule&quot;)):GetControls()
-
-
--------------------------------------------------------
--- UI Objects || Core
-local ScreenGui		 = PlayerGui:WaitForChild(&quot;ScreenGui&quot;)
-local Holder		 = ScreenGui:WaitForChild(&quot;Holder&quot;)
-
-
--------------------------------------------------------
--- Frames || Buttons
-local CreditsFrame	 = Holder.CreditsFrame
-local PlayButton	 = Holder.Play
-local CreditsButton  = Holder.Credits
-local BackButton 	 = Holder.CreditsFrame.Back
-
-
--------------------------------------------------------
--- UI Effects || ETCs
-local HoverColor	 = Color3.fromRGB(89, 183, 255)
-local OriginalColor  = Color3.fromRGB(255, 255, 255)
-local ButtonTable    = {PlayButton, CreditsButton}
-local Connections	 = {}
-
-
--------------------------------------------------------
--- Functions
-function PlayButtonActivated()
-	ScreenGui.Enabled = false
-	GuiService.SelectedObject = nil
-	Controls:Enable()
-	
-	for i, connection in pairs(Connections) do
-		connection:Disconnect()
-	end
-end
-
-function CreditsButtonActivated()
-	CreditsButton.Visible = false
-	PlayButton.Visible = false
-	
-	CreditsFrame.Visible = true
-	GuiService.SelectedObject = BackButton
-end
-
-function BackButtonActivated()
-	CreditsFrame.Visible = false
-	
-	CreditsButton.Visible = true
-	PlayButton.Visible = true
-	GuiService.SelectedObject = PlayButton
-end
-
-
--------------------------------------------------------
--- Connections
-PlayButton.Activated:Connect(PlayButtonActivated)
-BackButton.Activated:Connect(BackButtonActivated)
-CreditsButton.Activated:Connect(CreditsButtonActivated)
-
-for index, button in pairs(ButtonTable) do
-	local Enter1 = button.MouseEnter:Connect(function()
-		button.BackgroundColor3 = HoverColor
-	end)
-	
-	local Leave1 = button.MouseLeave:Connect(function()
-		button.BackgroundColor3 = OriginalColor
-	end)
-	
-	local Enter2 = button.SelectionGained:Connect(function()
-		button.BackgroundColor3 = HoverColor
-	end)
-	
-	local Leave2 = button.SelectionLost:Connect(function()
-		button.BackgroundColor3 = OriginalColor
-	end)
-	table.insert(Connections, Enter1)
-	table.insert(Connections, Leave1)
-	table.insert(Connections, Enter2)
-	table.insert(Connections, Leave2)
-end
-
-Controls:Disable()
-GuiService.SelectedObject = PlayButton
-</code></pre>
 
                     </main>
 
@@ -439,6 +342,21 @@ GuiService.SelectedObject = PlayButton
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
