@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Scripting The Menu - Cross-Platform Title Screen</title>
+        <title>2.2 - Scripting The Menu - Cross-Platform Title Screen</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Designing The Menu</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> Scripting The Menu</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 1 - Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 2.1 - Designing The Menu</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> 2.2 - Scripting The Menu</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#scripting-the-menu" id="scripting-the-menu">Scripting The Menu</a></h1>
+                        <h2><a class="header" href="#scripting-the-menu" id="scripting-the-menu">Scripting The Menu</a></h2>
 <p>To start scripting our UI, we'll want to insert a <code>LocalScript</code> into <code>StarterGui</code>. Name this local script &quot;UI_Manager&quot;. This is where we'll be doing the main scripting of our UI. </p>
 <pre><code class="language-lua">-------------------------------------------------------
 -- Services
@@ -303,21 +303,6 @@ GuiService.SelectedObject = PlayButton
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

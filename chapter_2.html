@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Designing The Menu - Cross-Platform Title Screen</title>
+        <title>2.1 - Designing The Menu - Cross-Platform Title Screen</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> Designing The Menu</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Scripting The Menu</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 1 - Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> 2.1 - Designing The Menu</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 2.2 - Scripting The Menu</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#design" id="design">Design</a></h1>
+                        <h2><a class="header" href="#basic-design" id="basic-design">Basic Design</a></h2>
 <p>Before we can script the UI, we'll need to properly design the menu before anything else. </p>
 <p>To start, we'll want to create a ScreenGui to display GUI. After that, we'll create a frame named &quot;Holder&quot;, to hold our UI elements. This allows us to scale our parent frame, and resize the children at the same time. Before we start adding children to the Holder frame, we'll want to edit a few properties.</p>
 <ul>
@@ -182,13 +182,19 @@
 <p>If done correctly, it should end up looking like below:</p>
 <p><img src="https://media.discordapp.net/attachments/565281989125472291/818913391535718450/Screenshot_1.png" alt="Screenshot" /></p>
 <p><img src="https://i.imgur.com/SPldves.png" alt="Screenshot2" /></p>
-<p>Finally, we'll want to add the credits menu. Insert a frame parented to &quot;Holder&quot;, and name it <code>CreditsFrame</code>. Change the size and position to Scale. We'll want to insert a <code>TextLabel</code>, change</p>
+<p>Finally, we'll want to add the credits menu. Insert a frame parented to &quot;Holder&quot;, and name it <code>CreditsFrame</code>. Change the size and position to Scale. We'll want to insert a <code>TextLabel</code>, change the name to <code>Creator</code>, and change the text to whatever you want for the credits.</p>
+<p>Alongside that, insert a text button into CreditsFrame, name it back, and add any extra details you may want.</p>
+<p>Now it should end up looking like this:</p>
+<p><img src="https://cdn.discordapp.com/attachments/689581763919347760/819263224406343700/unknown.png" alt="Screenshot3" />
+<img src="https://i.imgur.com/kS7TITB.png" alt="Screenshot4" /></p>
 <h2><a class="header" href="#preparation-for-scripting" id="preparation-for-scripting">Preparation for scripting</a></h2>
 <p>We'll change the Size and Position to scale, alongside changing the AnchorPoint to <code>0.5, 0.5</code>. Once that's done, we can place the buttons anywhere we want, and we're almost ready to start scripting. In order to take advantage of certain cross-platform compatability tools, we'll need to change certain properties in our buttons.</p>
 <p>To make sure the text is readable on all devices, we'll want to turn the <code>TextScaled</code> property to true, so it's not too big or small on any device. </p>
 <p>Next, we'll going to change certain properties to help make the UI compatible with consoles. For the <code>Play</code> button, we'll want to change the SelectionObjectDown to the <code>Credits</code> button, so users on controllers can select the UI by simply going down on the control pad. We'll want to do the same process for the <code>Credits</code> button, but change it to SelectionObjectUp.</p>
 <p><img src="https://media.discordapp.net/attachments/565281989125472291/818914009461948477/unknown.png" alt="img2" /></p>
-<p>After that, we'll want to give both of our text buttons the <code>Selectable</code> property, so controller users + keyboard users who use the WASD keys can select and hover over UI that way. Then we want to set the <code>Active</code> property to true, so our UI can detect inputs.</p>
+<p>After that, we'll want to set the <code>Selectable</code> property to true on both of our TextButtons. If you aren't familiar with this event, here's a quick rundown of what it does and how we can use it.</p>
+<p>The selectable property decides whether controller users can navigate to that GUI object when navigating UI with a controller and/or WASD keys. When set to true, the UIObject becomes navigatable.</p>
+<p>Then we want to set the <code>Active</code> property to true., The Active property in GuiButtons (or in this specific case, TextButtons) decides whether that UIButton will detect inputs or not. When the property is set to true, it opens up the ability for us to connect a function to <code>GuiButton.Activated</code>, a cross-platform event that allows us to detect inputs from controllers, mobile, and mouse/keyboard users.</p>
 <p><img src="https://i.imgur.com/zy0Zzn5.png" alt="img" /></p>
 
                     </main>
@@ -228,21 +234,6 @@
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
